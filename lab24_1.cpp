@@ -63,4 +63,23 @@ void List::append(int d){
 	size++;
 }
 
-//Write List::remove() here
+void List::remove(int idx) {
+    if (root == NULL || idx < 0) return; // กรณีที่ลิสต์ว่างหรือดัชนีไม่ถูกต้อง
+
+    Node *current = root;
+    if (idx == 0) { // กรณีลบโหนดตัวแรก
+        root = root->next;
+        delete current;
+        return;
+    }
+
+    Node *prev = nullptr;
+    for (int i = 0; i < idx; i++) {
+        prev = current;
+        current = current->next;
+        if (current == NULL) return; // ดัชนีเกินขนาดของลิสต์
+    }
+
+    prev->next = current->next;
+    delete current;
+}
